@@ -1,0 +1,14 @@
+from flask import Flask, request, send_file
+
+app = Flask(__name__)
+
+@app.route('/tryon', methods=['POST'])
+def tryon():
+    person = request.files['person']
+    garment = request.files['garment']
+    person.save("person.png")
+    garment.save("garment.png")
+    return send_file("garment.png", mimetype='image/png')
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=10000)
